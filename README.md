@@ -7,4 +7,4 @@ Npm install yazarak gerekli modülleri kuruyoruz.
 Kaç mesajda kaç xp vereceğini kendinize göre ayarlayabilirsiniz.
 Projeyi dilediğiniz gibi kullanabilirsiniz.
 
-<p align="left"> <img src="![image](https://user-images.githubusercontent.com/80893533/112602701-127c4400-8e25-11eb-8fcb-7457a831f592.png)" alt="Rank sistemi." /> </p>
+<p align="left"> <img src="https://cdn.discordapp.com/attachments/824917088741097512/824920116696186890/unknown.png" alt="Rank sistemi, level atlayınca yetki verme." /> </p>
