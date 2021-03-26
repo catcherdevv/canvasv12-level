@@ -6,5 +6,6 @@ Discord v12 Canvaslı Level Sistemi;
 - Npm install yazarak gerekli modülleri kuruyoruz.
 - Kaç mesajda kaç xp vereceğini kendinize göre ayarlayabilirsiniz.
 - Projeyi dilediğiniz gibi kullanabilirsiniz.
+- Bu proje serendia squad sunucusu adına paylaşılmıştır, çıkan sorunlar için discord.gg/serendiasquad
 
 <p align="left"> <img src="https://cdn.discordapp.com/attachments/822763553119141888/824920931574480936/unknown.png" alt="Rank sistemi, level atlayınca yetki verme." /> </p>
