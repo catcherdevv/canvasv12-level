@@ -1,0 +1,55 @@
+const Discord = require("discord.js");
+const SQlite = require("better-sqlite3");
+const sql = new SQlite('./mainDB.sqlite');
+const client = new Discord.Client();
+
+module.exports = {
+    name: 'rlevel-remove',
+    aliases: ['rlevel-remove'],
+    category: "Leveling",
+    description: "Seviyeyi belirtilen kullanıcıya göre kaldırın veya azaltın",
+    cooldown: 3,
+    async execute(message, args) {
+        let userArray = message.content.split(" ");
+        let userArgs = userArray.slice(1);
+        let user = message.mentions.members.first() || message.guild.members.cache.get(userArgs[0]) || message.guild.members.cache.find(x => x.user.username.toLowerCase() === userArgs.slice(0).join(" ") || x.user.username === userArgs[0])
+
+        if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply(`Bu komutu kullanmak için yetkiniz yok!`);
+
+        const levelArgs = parseInt(args[1])
+
+        client.getScore = sql.prepare("SELECT * FROM levels WHERE user = ? AND guild = ?");
+        client.setScore = sql.prepare("INSERT OR REPLACE INTO levels (id, user, guild, xp, level, totalXP) VALUES (@id, @user, @guild, @xp, @level, @totalXP);");
+        if (!user) {
+            return message.reply(`Lütfen bir kullanıcıdan bahsedin!`)
+        } else {
+            if (isNaN(levelArgs) || levelArgs < 1) {
+                return message.reply(`Lütfen geçerli bir sayı girin!`)
+            } else {
+                let score = client.getScore.get(user.id, message.guild.id);
+                if (!score) {
+                    score = {
+                        id: `${message.guild.id}-${user.id}`,
+                        user: user.id,
+                        guild: message.guild.id,
+                        xp: 0,
+                        level: 0,
+                        totalXP: 0
+                    }
+                }
+                if (score.level - levelArgs < 1) {
+                    return message.reply(`Bu kullanıcıdan seviyeleri kaldıramazsınız!`)
+                }
+                score.level -= levelArgs
+                const newTotalXP = levelArgs - 1
+                let embed = new Discord.MessageEmbed()
+                    .setTitle(`başarılı !`)
+                    .setDescription(`Başarıyla kaldırıldı ${levelArgs} level from ${user.toString()}!`)
+                    .setColor("RANDOM");
+                score.totalXP -= newTotalXP * 2 * 250 + 250
+                client.setScore.run(score)
+                return message.channel.send(embed)
+            }
+        }
+    }
+}

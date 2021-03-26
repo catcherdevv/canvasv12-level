@@ -1,0 +1,16 @@
+{
+  "name": "canvasv12level",
+  "version": "0.0.1",
+  "description": "Canvaslı hoş level sistemi.",
+  "main": "index.js",
+  "dependencies": {
+    "canvas": "^2.7.0",
+    "discord-logs": "^1.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Catcher",
+  "license": "ISC"
+}
